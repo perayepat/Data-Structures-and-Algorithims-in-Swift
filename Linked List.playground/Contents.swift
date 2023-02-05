@@ -17,7 +17,46 @@ struct LinkedList<Value>{
             tail = head
         }
     }
-    public init() {}
+    
+    mutating func append(_ value: Value){
+    /// If the linked list is empty push
+    /// make the next tail node the new node and the tail the added node
+        guard !isEmpty else{
+            push(value)
+            return
+        }
+        
+        let node = Node(value: value)
+        tail!.next = node
+        tail = node
+    }
+    
+    func node(at index:Int) -> Node<Value>? {
+        var currentIndex = 0
+        var currentNode = head
+        
+        while(currentNode != nil && currentIndex < index){
+            currentNode = currentNode?.next
+            currentIndex += 1
+        }
+        
+        return currentNode
+    }
+    
+    func insert(_ value: Value, after node:Node<Value>){
+        node.next = Node(value: value,next: node.next)
+    }
+    
+    init() {}
+}
+
+extension LinkedList: CustomStringConvertible{
+    var description: String {
+        guard let head = head else{
+            return "Empty List"
+        }
+        return String(describing: head)
+    }
 }
 
 /// Generic implementation where the value can be anything
@@ -46,5 +85,10 @@ var list = LinkedList<Int>()
 list.push(2)
 list.push(3)
 list.push(22)
+
+print(list)
+
+let middleNode = list.node(at: 1)!
+list.insert(999, after: middleNode)
 
 print(list)
