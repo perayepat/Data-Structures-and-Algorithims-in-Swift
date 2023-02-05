@@ -59,6 +59,30 @@ struct LinkedList<Value>{
         return head?.value
     }
     
+    mutating func removeLast() -> Value? {
+        ///what if there are no items
+        guard let head = head else {
+            return nil
+        }
+        ///what if there is only one item
+        guard head.next != nil else {
+            return pop()
+        }
+        
+        /// get the last element
+        /// going through till we hit the nil value and the previous
+        var prev = head
+        var current = head
+        
+        while let next = current.next {
+            prev = current
+            current = next
+        }
+        
+        prev.next = nil
+        tail = prev
+        return current.value
+    }
     init() {}
 }
 
