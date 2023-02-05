@@ -83,6 +83,21 @@ struct LinkedList<Value>{
         tail = prev
         return current.value
     }
+    
+    mutating func remove(after node: Node<Value>) -> Value? {
+        defer{
+            if node.next === tail {
+                tail = node
+            }
+            //skipping to the next node adter
+            //10 -> 1 -> 3
+            //making the 10 point to the 3
+            node.next = node.next?.next
+        }
+        
+        return node.next?.value
+    }
+    
     init() {}
 }
 
@@ -130,5 +145,20 @@ list.insert(999, after: middleNode)
 print(list)
 
 list.pop()
+
+print(list)
+
+list.removeLast()
+
+print(list)
+
+list.push(42)
+list.push(13)
+list.push(33)
+print(list)
+
+let index = 2
+let node = list.node(at: index - 1)!
+let removedValue = list.remove(after: node)
 
 print(list)
