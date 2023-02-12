@@ -14,5 +14,12 @@ var root = Node("Terry")
 root.add(child: andrew)
 root.add(child: paul)
 
-print(root)
-print(paul)
+//print(root)
+//print(paul)
+//
+//print(paul == andrew)
+//print(paul != andrew)
+//print(paul == paul)
+
+print(root.count)
+
