@@ -18,7 +18,7 @@ struct Stack<Element>{
 extension Stack: CustomStringConvertible {
     //Displaying the stack or the different values in a  nice way
     var description: String{
-        let topDivider = "-------Top-------"
+        let topDivider = "-------Top------- \n"
         let bottomDivider = "\n------------"
         
         let stackElements = storage.map{ "\($0)"}.reversed().joined(separator: "\n")
