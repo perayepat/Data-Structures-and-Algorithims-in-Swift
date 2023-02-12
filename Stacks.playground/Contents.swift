@@ -26,4 +26,16 @@ extension Stack: CustomStringConvertible {
     }
 }
 
+var stack = Stack<Int>()
+stack.push(20)
+stack.push(30)
+stack.push(10)
+
+print("before pop")
+print(stack)
+
+print("After Pop")
+stack.pop()
+print(stack)
+
 
