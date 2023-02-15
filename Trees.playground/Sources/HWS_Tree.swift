@@ -66,8 +66,8 @@ extension Node where Value: Equatable {
 }
 
 @resultBuilder
-struct NodeBuilder{
-    static func buildBlock<Value>(_ children: Node<Value>...) -> [Node<Value>]{
+public struct NodeBuilder{
+    public static func buildBlock<Value>(_ children: Node<Value>...) -> [Node<Value>]{
         children
     }
 }
