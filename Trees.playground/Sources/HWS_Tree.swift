@@ -5,7 +5,7 @@ import Foundation
  knowing how many children are in your tree
  searching in a tree
  */
-public struct Node<Value>{
+public final class Node<Value>{
     public var value : Value
     private(set) var children: [Node]
     
@@ -14,7 +14,7 @@ public struct Node<Value>{
         1 + children.reduce(0){$0 + $1.count}
     }
     
-    public mutating func add(child: Node){
+    public func add(child: Node){
         children.append(child)
     }
     
@@ -30,7 +30,31 @@ public struct Node<Value>{
 }
 
 /// Conditional Conformance
-extension Node: Equatable where Value: Equatable { }
-extension Node: Hashable where Value: Hashable { }
+extension Node: Equatable where Value: Equatable {
+    public static func ==(lhs:Node, rhs:Node) -> Bool{
+        lhs.value == rhs.value && lhs.children == rhs.children
+    }
+}
+extension Node: Hashable where Value: Hashable {
+    public func hash(into hasher: inout Hasher){
+        hasher.combine(value)
+        hasher.combine(children)
+    }
+}
 extension Node: Codable where Value: Codable { }
 
+extension Node where Value: Equatable {
+    ///Finding the children in a tree
+    public func find(_ value: Value) -> Node? {
+        if self.value == value{
+            return self
+        }
+
+        for child in children {
+            if let match = child.find(value){
+                return match
+            }
+        }
+        return nil
+    }
+}
