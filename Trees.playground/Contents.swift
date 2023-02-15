@@ -1,41 +1,26 @@
-import UIKit
+import Foundation
 
-//var andrew = Node("Andrew")
-//let john = Node("John")
-//andrew.add(child: john)
-//
-//var paul = Node("Paul")
-//var sophie = Node("Sophie")
-//let charlotte = Node("Charlottte")
-//paul.add(child: sophie)
-//paul.add(child: charlotte)
-//
-//var root = Node("Terry")
-//root.add(child: andrew)
-//root.add(child: paul)
-//
-//let taylor = Node("Taylor")
-//sophie.add(child: taylor)
-//print(root)
-//print(paul)
-//
-//print(paul == andrew)
-//print(paul != andrew)
-//print(paul == paul)
 
-//print(root.count)
+let beverages = TreeNode<String>("Beverages")
 
-//if let paul = root.find("Paul"){
-//    print(paul.count)
-//}
+let hot  = TreeNode<String>("Hot")
+let cold  = TreeNode<String>("Cold")
 
-let terry = Node("Terry"){
-    Node("Paul"){
-        Node("Sophie")
-        Node("Lottie")
-    }
-    
-    Node("Andrew"){
-        Node("John")
-    }
-}
+let tea = TreeNode("Tea")
+let coffee = TreeNode("Coffee")
+
+hot.add(tea)
+hot.add(coffee)
+
+let soda = TreeNode("Soda")
+let milk = TreeNode("Milk")
+
+cold.add(soda)
+cold.add(milk)
+
+beverages.add(hot)
+beverages.add(cold)
+
+//cold.forEachDepthFirst{print($0.value)}
+
+beverages.forEachLevelOrder{print($0.value)}

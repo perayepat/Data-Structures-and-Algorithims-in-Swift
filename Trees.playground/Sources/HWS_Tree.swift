@@ -71,3 +71,17 @@ public struct NodeBuilder{
         children
     }
 }
+
+
+//let terry = Node("Terry"){
+//    Node("Paul"){
+//        Node("Sophie")
+//        Node("Lottie")
+//    }
+//    
+//    Node("Andrew"){
+//        Node("John")
+//    }
+//}
+//
+//print(terry.count)
