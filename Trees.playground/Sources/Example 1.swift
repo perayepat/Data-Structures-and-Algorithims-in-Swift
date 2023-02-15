@@ -31,7 +31,7 @@ public class TreeNode<T>{
 }
 
 /// Breath first traversal where you go from the far most left and work you way to the right of the tree
-extension TreeNode {
+extension TreeNode where T: Equatable {
    public func forEachDepthFirst(_ visit:(TreeNode) -> Void){
         visit(self)
        children.forEach{ $0.forEachDepthFirst(visit)}
@@ -46,6 +46,17 @@ extension TreeNode {
             visit(node)
             node.children.forEach{queue.enqueue($0)}
         }
+    }
+    
+    public func search(_ Value: T) -> TreeNode? {
+        var result: TreeNode?
+        
+        forEachLevelOrder { node in
+            if node.value == value {
+                result = node
+            }
+        }
+        return result
     }
 }
 

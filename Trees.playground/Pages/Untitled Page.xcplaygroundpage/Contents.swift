@@ -23,4 +23,7 @@ beverages.add(cold)
 
 //cold.forEachDepthFirst{print($0.value)}
 
-beverages.forEachLevelOrder{print($0.value)}
+//beverages.forEachLevelOrder{print($0.value)}
+if let searchResult = beverages.search("Milk") {
+    print(searchResult.value)
+}
