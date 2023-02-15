@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 //MARK: - Notes
 /*
  making a struct equatable is good practice
@@ -26,6 +27,11 @@ public final class Node<Value>{
     public init(_ value: Value, children: [Node]) {
         self.value = value
         self.children = children
+    }
+    
+    public init(_ value: Value, @NodeBuilder builder: () -> [Node]){
+        self.value = value
+        self.children = builder()
     }
 }
 
@@ -56,5 +62,12 @@ extension Node where Value: Equatable {
             }
         }
         return nil
+    }
+}
+
+@resultBuilder
+struct NodeBuilder{
+    static func buildBlock<Value>(_ children: Node<Value>...) -> [Node<Value>]{
+        children
     }
 }
