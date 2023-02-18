@@ -9,7 +9,14 @@ public class BinaryNode<Element>{
     public init(value: Element) {
         self.value = value
     }
+    
+    public var min: BinaryNode{
+        ///When the smallest child isn't available then we have the smallest value
+        return leftChild?.min ?? self
+    }
 }
+
+
 
 extension BinaryNode: CustomStringConvertible {
     public var description: String {
@@ -76,7 +83,7 @@ extension BinarySearchTree{
                 return true
             }
             
-            ///This is using recursion to check the magnitude of the node if it's lesser or greater than and using that to traverse through the binary tree
+            ///This is using recursion to check the magnitude of the node if it's lesser or greater than and using that to traverse through the binary tree 
             if value < node.value{
                 current = node.leftChild
             } else {
@@ -85,4 +92,38 @@ extension BinarySearchTree{
         }
         return false
     }
+    
+    mutating func remove(_ value: Element){
+        root = remove(node: root, value: value)
+    }
+    
+    private func remove(node: BinaryNode<Element>?, value: Element) -> BinaryNode<Element>? {
+        guard let node = node else {return nil}
+        
+        if value == node.value{
+            if node.leftChild == nil && node.rightChild == nil{
+                return nil
+            }
+            
+            ///case of removeing nodes with one child
+            if node.leftChild == nil {
+                return node.rightChild
+            }
+            
+            if node.rightChild == nil {
+                return node.leftChild
+            }
+            
+            node.value = node.rightChild!.min.value
+            node.rightChild = remove(node: node.rightChild, value: node.value)
+            
+        } else if value < node.value {
+            node.leftChild = remove(node: node.leftChild, value: value)
+        } else {
+            node.rightChild = remove(node: node.rightChild, value: value)
+        }
+        
+        return node
+    }
 }
+
