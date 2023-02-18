@@ -27,5 +27,21 @@ struct Edge<T>{
     let weight: Double?
 }
 
+protocol Graph{
+    //makes sure it works with any type of element
+    /// Definition of a graph protocol which are common and this doesnt depend on the type of graph
+    associatedtype Element
+    func createdVertex(data: Element) -> Vertex<Element>
+    func addDirectedEdge(from source: Vertex<Element>, to destination: Vertex<Element>, weight: Double?)
+    func addUndirectedEdge(between source: Vertex<Element>, and destination: Vertex<Element>, weight: Double?)
+    func add(_ add: EdgeType, from source: Vertex<Element>, to destination: Vertex<Element>, weight: Double?)
+    func edges(from source: Vertex<Element>) -> [Edge<Element>]
+    func weight(from source: Vertex<Element>, to destination: Vertex<Element>) -> Double?
+}
     
+extension Graph{
+    //add UnirectedGraph
+    
+    //add  
+}
 //: [Next](@next)
