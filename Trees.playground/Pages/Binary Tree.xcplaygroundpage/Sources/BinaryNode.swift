@@ -12,3 +12,15 @@ public class BinaryNode<Element>{
         self.value = value
     }
 }
+
+extension BinaryNode{
+    /// traverse in  order is called revursively, Call made on the stack for the recursion
+    public func traverseInOrder(visit : (Element) -> Void){
+        
+        leftChild?.traverseInOrder(visit: visit)
+        ///when the left node doesn't have a child
+        visit(value) // this will print value when there is no left child and move to the right child
+        /// If the node have  a right child
+        rightChild?.traverseInOrder(visit: visit)
+    }
+}
