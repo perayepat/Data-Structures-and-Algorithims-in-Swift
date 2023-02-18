@@ -41,7 +41,45 @@ protocol Graph{
     
 extension Graph{
     //add UnirectedGraph
+    func addUndirectedEdge(between source: Vertex<Element>, and destination: Vertex<Element>, weight: Double?){
+        addUndirectedEdge(between: source, and: destination, weight: weight)
+        addUndirectedEdge(between: destination, and: source, weight: weight)
+    }
+    //add
+    func add(_ edge: EdgeType, from source: Vertex<Element>, to destination: Vertex<Element>, weight: Double?){
+        switch edge{
+        case.directed:
+            addDirectedEdge(from: source, to: destination, weight: weight)
+        case .undirected:
+            addUndirectedEdge(between: source, and: destination, weight: weight)
+        default:
+            addUndirectedEdge(between: source, and: destination, weight: weight)
+        }
+    }
+}
+
+class AdjecencyList<T: Hashable>: Graph{
+    private var adjecencies: [Vertex<T>: [Edge<T>]] = [:]
+    init() { }
     
-    //add  
+    func createdVertex(data: T) -> Vertex<T> {
+        let vertex = Vertex(data: data, index: adjecencies.count)
+        adjecencies[vertex] = []
+        return vertex
+    }
+    
+    func addDirectedEdge(from source: Vertex<T>, to destination: Vertex<T>, weight: Double?) {
+        let edge = Edge(source: source, destination: destination, weight: weight)
+        adjecencies[source]?.append(edge)
+    }
+    
+    func edges(from source: Vertex<T>) -> [Edge<T>] {
+        return adjecencies[source] ?? []
+    }
+    
+    func weight(from source: Vertex<T>, to destination: Vertex<T>) -> Double?{
+        return edges(from: source).first {$0.destination == destination}?.weight
+    }
+    
 }
 //: [Next](@next)
