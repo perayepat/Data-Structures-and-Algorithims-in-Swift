@@ -14,6 +14,16 @@ public class BinaryNode<Element>{
 }
 
 extension BinaryNode{
+    ///Calling these functions on themselves creates a calling stack
+    ///The recursion call the items on the stack and then picks up where we left off 
+    public func traversePostOrder(visit: (Element) -> Void){
+        /// This will go through the child nodes checking if they have children , when they don't have children the printout will happen
+        leftChild?.traversePostOrder(visit: visit)
+        rightChild?.traversePostOrder(visit: visit)
+        visit(value)
+    }
+    
+    
     /// traverse in  order is called revursively, Call made on the stack for the recursion
     public func traverseInOrder(visit : (Element) -> Void){
         
