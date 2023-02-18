@@ -19,9 +19,9 @@ nine.rightChild = three
 two.leftChild = four
 two.rightChild = six
 
-ten.traverseInOrder {
-    print($0)
-}
+//ten.traverseInOrder {
+//    print($0)
+//}
 //track
 
 //: [Next](@next)
